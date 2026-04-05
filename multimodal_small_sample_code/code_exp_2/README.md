@@ -123,3 +123,21 @@ Install with:
 ```bash
 pip install torch torchvision pillow
 ```
+
+---
+
+## Improvements suggestions
+
+### Better Text Encoder Options
+
+The current `SimpleTextEncoder` can be replaced with stronger pre-trained encoders. The table below ranks alternatives by capability:
+
+| Rank | Text Encoder | Type | Params (approx) | Why Better than SimpleTextEncoder | Best For | Difficulty to Integrate | Hugging Face Example |
+|------|-------------|------|-----------------|-----------------------------------|----------|------------------------|----------------------|
+| 1 | ModernBERT (Base/Large) | Encoder-only Transformer | 149M / 395M | Drop-in BERT replacement with modern training (longer context, better efficiency, RoPE, GeGLU, etc.). Outperforms old BERT on embeddings & retrieval. | Contrastive learning, retrieval | Medium (use HF) | `answerdotai/ModernBERT-base` |
+| 2 | SigLIP text tower (or CLIP text encoder) | Transformer | ~100–300M | Trained with sigmoid loss on massive image-text data. Excellent for contrastive alignment. | Pure CLIP-style training | Easy–Medium | OpenCLIP or `google/siglip-base` variants |
+| 3 | Gemma-2B / Gemma-3 (text part) | Decoder-only LLM | 2B+ | Very strong contextual understanding. Many 2025–2026 VLMs use Gemma-style decoders. | When you want richer semantics | Medium-High | `google/gemma-2-2b` |
+| 4 | Qwen2.5 / Qwen3 Embedding | LLM-based embedding model | 0.6B–7B | Instruction-aware, multilingual, excellent for retrieval & multimodal. | Multilingual captions | Easy (via sentence-transformers or HF) | `Qwen/Qwen3-Embedding-0.6B` |
+| 5 | RoBERTa or DeBERTa-v3 | Encoder-only | 125M–300M | Still strong baselines with better training than original BERT. | Quick upgrade | Easy | `roberta-base`, `microsoft/deberta-v3-base` |
+| 6 | DistilBERT or MiniLM | Distilled encoder | 66M / 33M | Much faster & lighter than your current encoder while being stronger. | Speed + small size | Very Easy | `distilbert-base-uncased` |
+| 7 | Jina Embeddings v4 or EmbeddingGemma | Multimodal-aware embedding | 300M+ | Supports text + vision in some variants; great for unified retrieval. | Future-proof multimodal | Medium | `jinaai/jina-embeddings-v4` |
