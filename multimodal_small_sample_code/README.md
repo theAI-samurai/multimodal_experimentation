@@ -2,6 +2,8 @@
 
 A from-scratch PyTorch exploration of CLIP (Contrastive Language-Image Pre-training), progressively refined across two experiments. Each experiment trains aligned image-text embeddings on a local COCO 2017 validation subset.
 
+NOTE :  copy the -->  data_loader.py to code2 or code1 folder to run end to end
+
 ---
 
 ## Repository Structure
